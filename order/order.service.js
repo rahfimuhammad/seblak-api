@@ -20,6 +20,9 @@ const getOrder = async () => {
         },
         include: {
             orderlist: {
+                orderBy: {
+                    createdAt: 'asc'
+                },
                 include: {
                     orderlistitem: {
                         include: {

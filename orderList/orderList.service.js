@@ -22,6 +22,9 @@ const getOrderList = async () => {
                 }
             },
             spicylevel: true
+        },
+        orderBy: {
+            createdAt: "asc"
         }
     })
 
@@ -40,6 +43,9 @@ const getOrderListByOrderId = async (orderId) => {
                 }
             },
             spicylevel: true
+        },
+        orderBy: {
+            createdAt: "asc"
         }
     })
 
