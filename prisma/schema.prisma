@@ -49,6 +49,7 @@ model Orderlistitem {
 model Products {
   id            String          @id @default(uuid())
   name          String
+  category      String
   price         Int
   Orderlistitem Orderlistitem[]
 }

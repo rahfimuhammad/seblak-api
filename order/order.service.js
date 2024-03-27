@@ -5,7 +5,7 @@ const createOrder = async (ordersData) => {
     const order = await prisma.order.create({
         data: {
             client: ordersData.client,
-            status: "processed"
+            status: "pending"
         }
     })
 
@@ -63,6 +63,21 @@ const getFinishedOrder = async (status) => {
     return finishedOrder
 }
 
+const processOrder = async (id, data) => {
+
+    const orderToFinish = await prisma.order.update({
+        where: {
+            id: id
+        },
+        data : {
+            client: data.client,
+            status: "processed"
+        }
+    })
+
+    return orderToFinish
+}
+
 const finishOrder = async (id, data) => {
 
     const orderToFinish = await prisma.order.update({
@@ -89,6 +104,7 @@ const deleteOrder = async (orderId) => {
 module.exports = {
     createOrder,
     getOrder,
+    processOrder,
     finishOrder,
     getFinishedOrder,
     deleteOrder

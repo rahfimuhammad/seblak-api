@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const { createOrder, getOrder, deleteOrder, finishOrder, getFinishedOrder } = require("./order.service")
+const { createOrder, getOrder, deleteOrder, processOrder, finishOrder, getFinishedOrder } = require("./order.service")
 
 router.post("/", async (req, res) => {
 
@@ -33,11 +33,22 @@ router.get("/finishedorder/:status", async (req, res) => {
     }
 })
 
-router.patch("/:orderId", async (req, res) => {
+router.patch("/finish/:orderId", async (req, res) => {
     try {
         const data = req.body
         const id = req.params.orderId
         const transaction = await finishOrder(id, data)
+        res.status(200).send({message: "success finish order", data: transaction})
+    } catch (error) {
+        res.status(400).send({message: error.message})
+    }
+})
+
+router.patch("/process/:orderId", async (req, res) => {
+    try {
+        const data = req.body
+        const id = req.params.orderId
+        const transaction = await processOrder(id, data)
         res.status(200).send({message: "success finish order", data: transaction})
     } catch (error) {
         res.status(400).send({message: error.message})

@@ -5,6 +5,7 @@ const createProducts = async (productsData) => {
     const product = await prisma.products.create({
         data: {
             name: productsData.name,
+            category: productsData.category,
             price: productsData.price,
         }
     })
