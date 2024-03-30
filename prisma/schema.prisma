@@ -22,14 +22,14 @@ model Spicylevel {
   id            Int             @id @default(autoincrement())
   level         Int
   price         Int
-  orderlist     Orderlist[]
+  orderlist     Orderlist[]     
 }
 
 model Orderlist {
   createdAt     DateTime        @default(now())
   id            String          @id @default(uuid())
   orderId       String
-  order         Order           @relation(fields: [orderId], references: [id])
+  order         Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderlistitem Orderlistitem[]
   additional    String?
   spicylevelId  Int
@@ -41,13 +41,14 @@ model Orderlistitem {
   id          String    @id @default(uuid())
   orderlistId String
   productsId  String
-  orderlist   Orderlist @relation(fields: [orderlistId], references: [id])
-  product     Products  @relation(fields: [productsId], references: [id])
+  orderlist   Orderlist @relation(fields: [orderlistId], references: [id], onDelete: Cascade)
+  product     Products  @relation(fields: [productsId], references: [id], onDelete: Cascade)
   qty         Int
 }
 
 model Products {
   id            String          @id @default(uuid())
+  createdAt     DateTime        @default(now())
   name          String
   category      String
   price         Int

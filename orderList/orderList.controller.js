@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
 
     try {
         const responseOrderListData = await createOrderList(req.body)
-        res.status(200).send({message: "success create order", data: responseOrderListData})
+        res.status(200).send({message: "success create orderlist", data: responseOrderListData})
 
     } catch (error) {
         res.status(400).send({message: error.message})

@@ -37,6 +37,15 @@ const getOrder = async () => {
 
     return order
 }
+const getOrderById = async (id) => {
+
+    const order = await prisma.order.findUnique({
+        where: {
+            id
+        }
+    })
+    return order
+}
 
 const getFinishedOrder = async (status) => {
     const finishedOrder = await prisma.order.findMany({
@@ -63,14 +72,16 @@ const getFinishedOrder = async (status) => {
     return finishedOrder
 }
 
-const processOrder = async (id, data) => {
+const processOrder = async (id) => {
+
+    const order = await getOrderById(id)
 
     const orderToFinish = await prisma.order.update({
         where: {
             id: id
         },
         data : {
-            client: data.client,
+            client: order.client,
             status: "processed"
         }
     })
@@ -78,14 +89,16 @@ const processOrder = async (id, data) => {
     return orderToFinish
 }
 
-const finishOrder = async (id, data) => {
+const finishOrder = async (id) => {
+
+    const order = await getOrderById(id)
 
     const orderToFinish = await prisma.order.update({
         where: {
             id: id
         },
         data : {
-            client: data.client,
+            client: order.client,
             status: "finished"
         }
     })
@@ -93,10 +106,10 @@ const finishOrder = async (id, data) => {
     return orderToFinish
 }
 
-const deleteOrder = async (orderId) => {
+const deleteOrder = async (id) => {
     await prisma.order.delete({
         where: {
-            id: orderId
+            id
         }
     })
 }

@@ -35,9 +35,8 @@ router.get("/finishedorder/:status", async (req, res) => {
 
 router.patch("/finish/:orderId", async (req, res) => {
     try {
-        const data = req.body
         const id = req.params.orderId
-        const transaction = await finishOrder(id, data)
+        const transaction = await finishOrder(id)
         res.status(200).send({message: "success finish order", data: transaction})
     } catch (error) {
         res.status(400).send({message: error.message})
@@ -46,10 +45,9 @@ router.patch("/finish/:orderId", async (req, res) => {
 
 router.patch("/process/:orderId", async (req, res) => {
     try {
-        const data = req.body
         const id = req.params.orderId
-        const transaction = await processOrder(id, data)
-        res.status(200).send({message: "success finish order", data: transaction})
+        const transaction = await processOrder(id)
+        res.status(200).send({message: "success process order", data: transaction})
     } catch (error) {
         res.status(400).send({message: error.message})
     }
