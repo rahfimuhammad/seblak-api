@@ -37,6 +37,7 @@ const getOrder = async () => {
 
     return order
 }
+
 const getOrderById = async (id) => {
 
     const order = await prisma.order.findUnique({
