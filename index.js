@@ -2,8 +2,11 @@ const express = require("express")
 const cors = require("cors")
 
 const app = express()
+require('dotenv').config()
 app.use(express.json())
 app.use(cors())
+
+const PORT = process.env.PORT || 2000;
 
 app.get('/', (req, res) => {
     res.send('hello world')
@@ -19,7 +22,7 @@ app.use("/products", productsController)
 app.use("/orderlistitem", orderListItemController)
 
 
-app.listen(2000, () => {
-    console.log(`port running at port 2000`)
+app.listen(PORT, () => {
+    console.log(`port running at port ${PORT}`)
 })
 
