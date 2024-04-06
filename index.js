@@ -19,7 +19,7 @@ app.use("/products", productsController)
 app.use("/orderlistitem", orderListItemController)
 
 
-app.listen(5000, () => {
-    console.log(`port running at port 5000`)
+app.listen(2000, () => {
+    console.log(`port running at port 2000`)
 })
 
