@@ -6,7 +6,8 @@ const createOrderList = async (orderListData) => {
         data: {
             orderId: orderListData.orderId,
             additional: orderListData.additional,
-            spicylevelId: orderListData.spicylevelId
+            spicylevelId: orderListData.spicylevelId,
+            spicylevelPrice: orderListData.spicylevelPrice
         }
     })
 

@@ -16,6 +16,7 @@ router.post("/", async (req, res) => {
 })
 
 router.get("/", async (req, res) => {
+    const category = req.query
 
     try {
         const products = await getProducts()

@@ -16,11 +16,15 @@ const createProducts = async (productsData) => {
 }
 
 const getProducts = async () => {
-    const products = await prisma.products.findMany()
 
-    return {
-        products
-    }
+    const products = await prisma.products.findMany({
+        orderBy: [
+            { category: 'asc' }, 
+            { name: 'asc' }
+        ]
+    });
+
+    return products;
 }
 
 const deleteProduct = async (productId) => {

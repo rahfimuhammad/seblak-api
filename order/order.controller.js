@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const { createOrder, getOrder, deleteOrder, processOrder, finishOrder, getFinishedOrder, getTotalOrder, getTotalPages } = require("./order.service")
+const { createOrder, getOrder, deleteOrder, processOrder, finishOrder, getTotalOrder, getTotalPages } = require("./order.service")
 
 router.post("/", async (req, res) => {
 
@@ -14,35 +14,28 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.get("/", async (req, res) => {
+router.get("/:status", async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.size) || 10;
+    const status = req.params.status;
+    const dateRange = req.query.dateRange || 'all'; 
+    const sortBy = req.query.sortBy || 'datedesc'; 
 
     try {
-        const totalOrder = await getTotalOrder();
-        const totalPages = await getTotalPages(pageSize);
-        const order = await getOrder(page, pageSize)
-        res.status(200).send({message: "success get orders", data: {order, totalOrder, totalPages}})
+        const order = await getOrder(status, dateRange, sortBy, page, pageSize);
+        const totalOrder = await getTotalOrder(dateRange, status);
+        const totalPages = await getTotalPages(pageSize, totalOrder);
+
+        res.status(200).send({
+            message: "success get orders",
+            data: order,
+            totalOrder,
+            totalPages
+        });
     } catch (error) {
-        res.status(404).send({message: error.message})
+        res.status(404).send({ message: error.message });
     }
-})
-
-router.get("/finishedorder/:status", async (req, res) => {
-
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.size) || 10;
-
-    try {
-        const totalOrder = await getTotalOrder();
-        const totalPages = await getTotalPages(pageSize);
-        const status = req.params.status
-        const finishedOrder = await getFinishedOrder(status, page, pageSize)
-        res.status(200).send({message: "success get orders", data: finishedOrder, totalOrder, totalPages})
-    } catch (error) {
-        res.status(404).send({message: error.message})
-    }
-})
+});
 
 router.patch("/finish/:orderId", async (req, res) => {
     try {

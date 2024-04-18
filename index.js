@@ -15,10 +15,13 @@ app.get('/', (req, res) => {
 const orderController = require("./order/order.controller")
 const orderListController = require("./orderList/orderList.controller")
 const productsController = require("./products/products.controller")
+const spicylevelController = require("./spicyLevel/spicylevel.controller")
 const orderListItemController = require("./orderListItem/orderListItem.controller")
+
 app.use("/order", orderController)
 app.use("/orderlist", orderListController)
 app.use("/products", productsController)
+app.use("/spicylevel", spicylevelController)
 app.use("/orderlistitem", orderListItemController)
 
 
