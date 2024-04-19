@@ -180,9 +180,9 @@ const processOrder = async (id) => {
     return orderToFinish
 }
 
-const finishOrder = async (id) => {
+const finishOrder = async (id, totalData) => {
 
-    const order = await getOrderById(id, totalData)
+    const order = await getOrderById(id)
 
     const orderToFinish = await prisma.order.update({
         where: {
