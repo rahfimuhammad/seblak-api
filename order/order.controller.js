@@ -38,9 +38,12 @@ router.get("/:status", async (req, res) => {
 });
 
 router.patch("/finish/:orderId", async (req, res) => {
+
+    const totalData = req.body
+
     try {
         const id = req.params.orderId
-        const transaction = await finishOrder(id)
+        const transaction = await finishOrder(id, totalData)
         res.status(200).send({message: "success finish order", data: transaction})
     } catch (error) {
         res.status(400).send({message: error.message})

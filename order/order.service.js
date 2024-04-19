@@ -182,7 +182,7 @@ const processOrder = async (id) => {
 
 const finishOrder = async (id) => {
 
-    const order = await getOrderById(id)
+    const order = await getOrderById(id, totalData)
 
     const orderToFinish = await prisma.order.update({
         where: {
@@ -190,7 +190,8 @@ const finishOrder = async (id) => {
         },
         data : {
             client: order.client,
-            status: "finished"
+            status: "finished",
+            total: totalData.total
         }
     })
 
