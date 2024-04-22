@@ -156,9 +156,9 @@ const getOrder = async (status, date, sortBy, page, pageSize) => {
     } else if (sortBy === 'nameasc') {
         orderBy = { client: 'asc' }; 
     } else if (sortBy === 'pricedesc') {
-        orderBy = { totalPrice: 'desc' };
+        orderBy = { total: 'desc' };
     } else if (sortBy === 'priceasc') {
-        orderBy = { totalPrice: 'asc' };
+        orderBy = { total: 'asc' };
     }
 
     const finishedOrder = await prisma.order.findMany({
