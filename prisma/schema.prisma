@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Order {
-  createdAt DateTime    @default(now())
+  createdAt DateTime    
   id        String      @id @default(uuid())
   client    String
   status    String
