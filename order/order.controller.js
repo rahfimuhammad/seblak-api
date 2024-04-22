@@ -18,12 +18,12 @@ router.get("/:status", async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.size) || 10;
     const status = req.params.status;
-    const dateRange = req.query.dateRange || 'all'; 
+    const date = req.query.date
     const sortBy = req.query.sortBy || 'datedesc'; 
 
     try {
-        const order = await getOrder(status, dateRange, sortBy, page, pageSize);
-        const totalOrder = await getTotalOrder(dateRange, status);
+        const order = await getOrder(status, date, sortBy, page, pageSize);
+        const totalOrder = await getTotalOrder(date, status);
         const totalPages = await getTotalPages(pageSize, totalOrder);
 
         res.status(200).send({
