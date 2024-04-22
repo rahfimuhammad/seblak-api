@@ -140,7 +140,7 @@ const getOrder = async (status, date, sortBy, page, pageSize) => {
 
     if (date) {
         where.createdAt = {
-            gte: new Date(date), // Mulai dari tanggal yang diberikan
+            gte: new Date(new Date(date).setHours(0, 0, 0)), // Mulai dari tanggal yang diberikan
             lt: new Date(new Date(date).setHours(23, 59, 59, 999)), // Hingga akhir hari tersebut
         };
     }
