@@ -43,7 +43,7 @@ model Orderlist {
 model Orderlistitem {
   id            String    @id @default(uuid())
   orderlistId   String
-  productsId    String
+  productsId    Int
   qty           Int
   productName   String?
   productPrice  Int?
@@ -52,8 +52,7 @@ model Orderlistitem {
 }
 
 model Products {
-  id            String          @id @default(uuid())
-  tempId        Int?            
+  id            Int            @id @default(autoincrement())
   name          String
   category      String
   price         Int
