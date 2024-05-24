@@ -53,7 +53,7 @@ model Orderlistitem {
 
 model Products {
   id            String          @id @default(uuid())
-  createdAt     DateTime        @default(now())
+  tempId        Int?            
   name          String
   category      String
   price         Int
