@@ -27,6 +27,17 @@ const getProducts = async () => {
     return products;
 }
 
+const getTopProducts = async () => {
+    const topProducts = await prisma.products.findMany({
+        orderBy: [
+            { price: 'desc' }
+        ],
+        take: 3
+    });
+
+    return topProducts;
+}
+
 const deleteProduct = async (productId) => {
     await prisma.products.delete({
         where: {

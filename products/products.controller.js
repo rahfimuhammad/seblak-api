@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const { createProducts, getProducts, deleteProduct } = require("./products.service")
+const { createProducts, getProducts, getTopProducts, deleteProduct } = require("./products.service")
 
 router.post("/", async (req, res) => {
 
@@ -16,7 +16,6 @@ router.post("/", async (req, res) => {
 })
 
 router.get("/", async (req, res) => {
-    const category = req.query
 
     try {
         const products = await getProducts()
@@ -26,6 +25,18 @@ router.get("/", async (req, res) => {
     } catch (error) {
         res.status(404).send({message : error.message})
     }
+})
+
+router.get("/toplist", async (req, res) => {
+
+    try {
+        const topProducts = await getTopProducts()
+
+        res.status(200).send({data: topProducts})
+    } catch (error) {
+        res.status(404).send({message : error.message})
+    }
+
 })
 
 router.delete("/:productId", async (req,res) => {
