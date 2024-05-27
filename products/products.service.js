@@ -49,5 +49,6 @@ const deleteProduct = async (productId) => {
 module.exports = {
     createProducts,
     getProducts,
+    getTopProducts,
     deleteProduct
 }
